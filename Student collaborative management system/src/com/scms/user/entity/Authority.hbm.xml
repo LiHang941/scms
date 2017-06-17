@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.user.entity" auto-import="true">
+	<!-- 权限管理表  t_Authority -->
+	<class name="Authority" table="t_temp_Authority">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		<!-- 对应模块关系 -->
+		<many-to-one name="modular" class="com.scms.sys.entity.Modular" column="Authority_Modular" lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>

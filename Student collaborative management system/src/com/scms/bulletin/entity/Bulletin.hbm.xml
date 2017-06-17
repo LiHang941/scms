@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.bulletin.entity" auto-import="true">
+	<!-- 公告表  t_Bulletin -->
+	<class name="Bulletin" table="t_Bulletin">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		
+		<!-- 时间 -->
+		<property name="date" type="java.util.Date" column="Bulletin_Date"></property>
+		
+		<!-- 标题 -->
+		<property name="title" type="string" length="4000" column="Bulletin_Title"></property>
+		
+		<!-- 内容 --> 
+		<property name="content" type="text" column="Bulletin_Content" ></property>
+
+		<!-- 公告所属那个   -->
+		<property name="deptManagerName" type="string" length="200" column="Bulletin_DeptManagerName" ></property>
+		
+		<!-- 备注 -->		
+		<property name="record" type="string" length="4000" column="Bulletin_Record" ></property>
+		
+		<!-- 状态 -->
+		<property name="state" type="integer" column="Bulletin_State"></property>
+		<!-- 浏览次数 -->
+		<property name="browseInforMationCount" type="long" column="Bulletin_browseInforMationCount"></property>
+		
+		<!-- 发帖用户   关联-->
+		<many-to-one name="user" class="com.scms.user.entity.User" column="Bulletin_User" lazy="false"></many-to-one>
+		
+		<!-- 类别  关联-->		
+		<many-to-one name="category" class="com.scms.bulletin.entity.Category" column="Bulletin_category" lazy="false"></many-to-one>
+		
+	</class>
+	
+	
+
+</hibernate-mapping>

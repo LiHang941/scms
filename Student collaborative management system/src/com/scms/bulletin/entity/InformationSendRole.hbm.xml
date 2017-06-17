@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.bulletin.entity" auto-import="true">
+	<!-- 消息与角色中间表 t_temp_InformationSendRole -->
+	<class name="InformationSendRole" table="t_temp_InformationSendRole">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		<many-to-one name="role" class="com.scms.user.entity.Role" column="InformationSendRole_Role"></many-to-one>
+	</class>
+	
+	
+
+</hibernate-mapping>
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.bulletin.entity" auto-import="true">
+	<!-- 公告表  t_Information -->
+	<class name="Information" table="t_Information">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		
+		<!-- 时间 -->
+		<property name="date" type="java.util.Date" column="Information_Date"></property>
+		
+		<!-- 标题 -->
+		<property name="title" type="string" length="4000" column="Information_Title"></property>
+		
+		<!-- 内容 --> 
+		<property name="content" type="text" column="Information_Content" ></property>
+
+		<!-- 状态 -->
+		<property name="state" type="integer" column="Information_State"></property>
+		
+		<!-- 浏览次数 -->
+		<property name="browseInforMationCount" type="long" column="Information_browseInforMationCount"></property>
+		
+		<!-- 发帖用户   关联-->
+		<many-to-one name="user" class="com.scms.user.entity.User" column="Information_User" lazy="false"></many-to-one>
+		<!-- 接收消息的角色模块 -->
+		<list name="roles"  cascade="all" lazy="false" > 
+			<key column="role_Id"></key>
+			<index column="[index]" type="string"></index>
+			<one-to-many class="com.scms.bulletin.entity.InformationSendRole" />
+		</list>
+	</class>
+	
+	
+
+</hibernate-mapping>

@@ -1,0 +1,306 @@
+######################################################################
+#Student collaborative management system (学生协同管理系统程序问题解决)#
+######################################################################
+
+
+2017.1.13
+	
+		1. Action中的Service 实现 IService  所有又因为用了AOP 为Service生成了代理对象  代理对象为IService
+		2. Service 和 Dao  在Spring 管理下都是单例
+		3. 	Action交给Spring管理   有 struts2 - spring -plugin  自动创建action 不能
+		 是单例的   在Action配置的Class使用spring Id即可
+		4.分页 (页码,长度) 		 
+		5.　　
+			Query query=session.createQuery(“from User user where user.name=? and user.age =? ”);
+　			query.setString(0,name);
+　　			query.setInteger(1,age);
+		6.
+			Query query=session.createQuery(“from User user where user.name=:customername and user:customerage=:age ”);
+		　　query.setString(“customername”,name);
+		　　query.setInteger(“customerage”,age);
+		
+		
+		7.分页后的结果不返回空  返回size= 0 的list
+		
+		8.JSON问题:貌似只有int  和 String 能进行转换
+		
+		9.<a> 标签的异步请求
+		我用 jQuery 库 的函数为例。
+
+			<a href="123.html" id="a">点我</a>
+			js :
+			$('a').click(function(){
+			     $.get($(this).attr('href'),function(data){
+			      alert(data);
+			    });
+			});
+			
+		10.AJAX 不能跨域  跨域不能访问
+		XMLHttpRequest cannot load http://localhost:8080/Student_collaborative_management_system/user/showBulletinByCategory?time=1484657459067. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
+		11.AJAX 重定向
+		
+		打开一个页面进行跳转
+		window.open("http://localhost:8080/Student_collaborative_management_system/user/getIndexPage");
+		
+		在本页面跳转
+		window.location.href='http://localhost:8080/Student_collaborative_management_system/user/getIndexPage';
+		
+		页面刷新
+		window.location.reload();
+		
+		10.Hibernate between 2017-1-14 and 2017-1-15 问题
+		
+		结果发现需要加"'" --> between '2017-1-14' and '2017-1-15'
+		
+		11.JQuery  AJAX问题   需要设置返回类型 'json' 'text'
+		
+		12.JSON乱码问题    在PrintWriter 前设置输出的格式 
+		
+		13.Action 接受  Set集合
+				前台
+				<h3>Set集合</h3>  
+				<form method="post" action="user_addStuSet">  
+					学生1   
+					编号：<input type="text" name="stuSet.makeNew[0].stuNo" />  
+					姓名：<input type="text" name="stuSet.makeNew[0].stuName" />  
+					年龄：<input type="text" name="stuSet.makeNew[0].stuAge" /><br/>  
+					学生2   
+					编号：<input type="text" name="stuSet.makeNew[1].stuNo" />  
+					姓名：<input type="text" name="stuSet.makeNew[1].stuName" />  
+					年龄：<input type="text" name="stuSet.makeNew[1].stuAge" /><br/>  
+					学生3   
+					编号：<input type="text" name="stuSet.makeNew[2].stuNo" />  
+					姓名：<input type="text" name="stuSet.makeNew[2].stuName" />  
+					年龄：<input type="text" name="stuSet.makeNew[2].stuAge" /><br/>  
+					<input type="submit" value="提交" />  
+				</form>  
+				
+				3. Set集合比较特殊，必须使用到OGNL中makeNew的运算符来表示
+		       		格式：‘变量名.makeNew[索引].属性’
+				
+				
+				Action 
+				  private Set<Student> stuSet = new HashSet<>();  
+				  
+				  
+				  
+				  
+		  14.Hibernate 注解使用    主键生成策略
+				@GeneratedValue(strategy=GenerationType.TABLE,generator="teacher_id")
+				配置错,
+				
+				JPA提供的四种标准用法为TABLE,SEQUENCE,IDENTITY,AUTO. 
+				TABLE：使用一个特定的数据库表格来保存主键。 
+				SEQUENCE：根据底层数据库的序列来生成主键，条件是数据库支持序列。 
+				IDENTITY：主键由数据库自动生成（主要是自动增长型） 
+				AUTO：主键由程序控制。 
+				
+				你用GenerationType.TABLE,需要另一个表格来保存主键.
+				
+				如果想主键自增长,就使用AUTO
+				
+				@GeneratedValue(strategy = GenerationType.AUTO)  
+				在指定主键时，如果不指定主键生成策略，默认为AUTO。 
+		  
+		  
+		  
+		  
+		  15.可以使用代理 AOP 的方式来实现权限的控制
+		  
+		  16.Struts2 注解配置拦截器
+		   @SuppressWarnings({ "unchecked"})  
+   			 @Action(value="todoList",results={  
+            @Result(name="success",location="/contractReview/todoList.jsp")  
+            },  
+          interceptorRefs = {@InterceptorRef(value = "mydefault")}  )
+   		 // 拦截器    
+      
+		  
+		  
+		  17.Struts2+UEditor 整合
+		  由于Struts2中会自动拦截上传的文件  
+		  所以要通过配置Filter 来对请求进行
+		  
+		  
+		  18.JQuery操作Select标签
+							  jQuery是控制和操作select详解。
+					先看下面的html代码 
+					<select id="test">
+					<option value="1">选项一<option>
+					<option value="2">选项一<option>
+					                         ...
+					<option value="n">选项N<option>
+					</select>
+					所谓jQuery操作“select”, 说的更确切一些是应该是jQuery控制 “option”， 看下面的jQuery代码：
+					//获取第一个option的值
+					$('#test option:first').val();
+					//最后一个option的值
+					$('#test option:last').val();
+					//获取第二个option的值
+					$('#test option:eq(1)').val();
+					//获取选中的值
+					$('#test').val();
+					$('#test option:selected').val();
+					//设置值为2的option为选中状态
+					$('#test').attr('value','2');
+					//设置最后一个option为选中
+					$('#test option:last').attr('selected','selected');
+					$("#test").attr('value' , $('#test option:last').val());
+					$("#test").attr('value' , $('#test option').eq($('#test option').length - 1).val());
+					//获取select的长度
+					$('#test option').length;
+					//添加一个option
+					$("#test").append("<option value='n+1'>第N+1项</option>");
+					$("<option value='n+1'>第N+1项</option>").appendTo("#test");
+					//添除选中项
+					$('#test option:selected').remove();
+					//删除项选中(这里删除第一项)
+					$('#test option:first').remove();、
+					//指定值被删除
+					$('#test option').each(function(){
+					   if( $(this).val() == '5'){
+					        $(this).remove();
+					    }
+					});
+					$('#test option[value=5]').remove();
+					//获取第一个Group的标签
+					$('#test optgroup:eq(0)').attr('label');
+					//获取第二group下面第一个option的值
+					$('#test optgroup:eq(1) : option:eq(0)').val();
+		  
+		  
+		  
+		  
+		  
+		  19.事务的配置，如果事务配置出现错误就会出现NoSession的问题
+		  
+		  20.使用eclipse 在进行源文件删除后  要删除编译后的文件  
+		  然后在编译 ，不然会出现， 被删除的原文件的编译文件还存在
+		  就会导致一些BUG   。  eclipse 的导航栏  Peoject --> Clean 重新编译
+ 		  
+		  21.出现BUG  一般是自己的问题    先检查代码是否有问题  
+		  不然到处Baidu  ，最后发现是自己的一个符号写错，简直哭笑不得
+		  
+		  22.JS判断输入的是否是数字  isNaN(xxx)
+		  
+		  23.JS字符串全局替换 str.replace(/Microsoft/g, "W3School")
+		  
+		  24.JS中 使用转义字符    列如(")...
+		  
+		  25.文字溢出 ...  
+		    text-overflow:ellipsis;  
+			white-space:nowrap;
+			overflow:hidden;
+		  
+		  26.table  设置宽高后  其大小还是会因为td 或者 th  大小而变化
+		  
+		  table-layout:fixed ;   设置该样式   td都是相同宽度  不会因为内容撑爆td
+		  
+		  
+		  27.jQuery  判断 checkBox 是否选中
+			下面的代码才是判断是不是被选中：
+			方法一：if ($("#checkbox-id")get(0).checked) {   // do something}
+			方法二：if($('#checkbox-id').is(':checked')) {   // do something}
+			方法三：if ($('#checkbox-id').attr('checked')) {   // do something}
+		  
+		  
+		  28.Hibernate 集合查询过虑
+		  
+		  
+							  一个老师教许多学生,一个学生被许多老师教,一个学生有好多书,同一种书被许多同学拥有. 
+					要查询教拥有书"a"的学生的老师!HQL如何写呀?如何取值? 
+					class teacher{ 
+					String id; 
+					String name; 
+					Set students; 
+					} 
+					class student{ 
+					String id; 
+					String name; 
+					Set teachers; 
+					Set books; 
+					} 
+					class book{ 
+					String id; 
+					String name; 
+					Set students; 
+					}
+					
+					 
+					
+					================================
+					
+					这种写法(t.students)肯定是可以的,你试试 
+					SELECT t FROM teacher t join t.students s join s.books b where b.name = 'a'
+					
+					================================
+					
+					SELECT t FROM teacher t where t.students.books.name = 'a'   
+					
+					首先students.books这里,students是集合,所以这个表达式是肯定不对的 
+					同理books.name也不对
+					
+					================================
+					
+					SELECT t FROM Teacher t,Student s,Book b where s.id in elements(t.students) and b.id in elements(s.books) 
+					这种方法没有出错!不过这种方式要用子查询!
+					
+					================================
+					
+					是的,element(Set)和indice(List)都可以取集合中的元素,但用在where子句的条件是需要数据库支持子查询,mysql就不行 
+					
+					另外t.students s中s并不是集合的意思,而是t的students对象的表别名,join t.students s这个hql,hibernate会翻译成两个表的内连接关系 
+				
+			29.编码问题	
+				找到Tomcat安装路径下conf\server.xml中
+			    <Connector port="8080" protocol="HTTP/1.1" 
+			               connectionTimeout="20000" 
+			               redirectPort="8443" />加个URIEncoding= "UTF-8" 就OK了。
+				更改后如下
+			    <Connector port="8080" protocol="HTTP/1.1" 
+			               connectionTimeout="20000" 
+			               redirectPort="8443" URIEncoding= "UTF-8"/>
+			               
+			30.文件上传问题
+				 <s:form action="admin/addImageItems.do" method="post" enctype="multipart/form-data">
+
+				
+			31.配置log4j相对Web路径	
+				使用Servlet 的init 功能  初始化路径	  
+		  
+		  
+		  	32.解决时间在数据库中保存时分秒
+		  	
+		  	33.Query对象  的 setPramaer 是从0开始的
+		  	
+		  	
+		  	34. // 获取web工程绝对路径
+
+			Java WEB ACTION中:
+			String absPath = new Java.io.File(((HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST)).getRealPath("/")).getParent(); System.out.println("+++" + absPath);
+			
+			JSP:
+			
+			根目录:request.getRequestURI()
+			文件的绝对路径 　:application.getRealPath(request.getRequestURI());
+			当前web应用的绝对路径 :application.getRealPath("/");
+			
+			
+			SERVLET中：
+			
+			根目录:request.getServletPath();
+			文件的绝对路径 :
+			javax.servlet.http.HttpSession.getServletContext()
+			request.getSession().getServletContext().getRealPath
+			当前web应用的绝对路径:servletConfig.getServletContext().getRealPath("/");
+			
+			
+			35.中文乱码   一般出现在Get方式提交的内容 上   因为get方式只支持iso8859-1编码  所以乱码是很正常的
+				
+			36.有时候用<s:property 输出一些带有html字符的控制字符串，本意是想让它可以解析成一些功能文字，比如超链接。可是，struts2会把HTML原样输出，因为struts标签会对html进行自动的编码。
+
+			解决办法：
+				此标签有内置属性escape，默认值是true。把escape设置为"false"就行了……
+			example：
+			    <s:property value="存有HTML的变量或表达式" escape="false"/>
+	

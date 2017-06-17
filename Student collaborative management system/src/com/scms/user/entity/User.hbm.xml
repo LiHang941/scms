@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.user.entity" auto-import="true">
+	<!-- 用户表  t_User -->
+	<class name="User" table="t_User">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		<property name="name" length="50" type="string" column="User_name"></property>
+		
+		<property name="account" length="50" type="string" column="User_account"></property>
+		
+		<property name="pwd" length="50" type="string" column="User_password"></property>
+		
+		<property name="isModifyPassword" type="integer" column="User_isModifyPassword"></property>
+		
+		<property name="isLocking" type="integer" column="User_isLocking"></property>
+		
+		<property name="isDelete" type="integer" column="User_isDelete"></property>
+		
+		<property name="date" type="java.util.Date" column="User_date"></property>
+		<!-- 默认设置懒加载 -->
+		<many-to-one name="role" class="com.scms.user.entity.Role" column="User_role" ></many-to-one>
+	</class>
+	
+	
+
+</hibernate-mapping>

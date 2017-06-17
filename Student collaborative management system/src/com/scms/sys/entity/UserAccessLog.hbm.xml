@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.sys.entity" auto-import="true">
+	<!-- 用户访问记录表    t_sys_AccessLog  (系统) -->
+	<class name="UserAccessLog" table="t_sys_UserAccessLog">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="ip" type="string" column="AccessLog_ip"></property>
+		<property name="date" type="java.util.Date" column="AccessLog_date"></property>
+		<property name="systemInfo" type="string" column="AccessLog_systemInfo"></property>
+		<many-to-one name="user"  class="com.scms.user.entity.User" column="AccessLog_user" lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>

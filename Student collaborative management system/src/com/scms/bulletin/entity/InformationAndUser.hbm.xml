@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.bulletin.entity" auto-import="true">
+	<!-- 消息与 用户中间表 t_temp_InformationAndUser -->
+	<class name="InformationAndUser" table="t_temp_InformationAndUser">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		<property name="state" type="integer" column="InformationAndUser_State"></property>
+		<many-to-one name="user" class="com.scms.user.entity.User" column="InformationAndUser_user"></many-to-one>
+		<many-to-one name="information" class="com.scms.bulletin.entity.Information" column="InformationAndUser_information"></many-to-one>
+	</class>
+	
+	
+
+</hibernate-mapping>
+
+

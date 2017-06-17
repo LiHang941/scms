@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd ">
+
+<struts>
+
+	<!-- 配置常量 -->
+	<!-- struts2的国际化大致上分为页面的国际化,Action的国际化以及xml的国际化 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 是否使用struts的开发模式。开发模式会有更多的调试信息。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 指定被struts2处理的请求后缀类型。多个用逗号隔开  -->
+	<constant name="struts.action.extension" value="do"/>
+	<!-- 当struts.xml改动后，是否重新加载。默认值为false(生产环境下使用),开发阶段最好打开 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	
+	<!-- 设置上传文件时不要Tomcat的临时路径,使用设置的值-->
+	<constant name="struts.multipart.saveDir" value="/home/filetemp/" />
+	<!-- 设置上传文件大小      最大10M -->
+	<constant name="struts.multipart.maxSize" value="10485760" />
+	
+
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<!-- 所有的拦截器自定义的配置和引用、已经拦截栈的定义都应放在interceptors中 -->
+			<!-- 自定义拦截器 name指定自定义拦截器的引用名称 class 指定该拦截器的实现类(完整路径) -->
+			<interceptor name="userModularInterceptor"
+				class="com.scms.user.filter.UserModularInterceptor" />
+			<interceptor name="bulletinModularInterceptor"
+				class="com.scms.bulletin.filter.BulletinModularInterceptor" />
+			<interceptor name="sysModularInterceptor"
+				class="com.scms.sys.filter.SysModularInterceptor" />	
+				
+			<!-- 用户权限管理权限拦截器  -->
+			<interceptor-stack name="userModularCheckStack">
+				<interceptor-ref name="userModularInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<!-- 公告权限管理权限拦截器 -->
+			<interceptor-stack name="bulletinModularCheckStack">
+				<interceptor-ref name="bulletinModularInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<!-- 系统权限管理权限拦截器 -->
+			<interceptor-stack name="sysModularCheckStack">
+				<interceptor-ref name="sysModularInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			<!-- 防止反馈消息重复提交 -->
+			<interceptor-stack name="complaintSaveStack">
+				<interceptor-ref name="token" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		
+		 <!-- 定义全局Result -->  
+        <global-results>  
+        	<!-- 跳转主页 -->
+	            <result name="index" type="redirectAction">
+	            	<param name="namespace">/</param>
+	            	<param name="actionName">index</param>
+	            </result>
+	        <!-- 跳转管理主页 -->
+	            <result name="managerIndex" type="redirectAction">
+	            	<param name="namespace">/manager</param>
+	            	<param name="actionName">main</param>
+	            </result>
+	            
+	            <!-- 跳转404页面-->
+	            <result name="error404" type="redirectAction">
+	            	<param name="namespace">/errorPage</param>
+	            	<param name="actionName">error404</param>
+	            </result>
+	            
+	             <!-- 跳转无权限页面-->
+	            <result name="noAuthority" type="redirectAction">
+	            	<param name="namespace">/errorPage</param>
+	            	<param name="actionName">noAuthority</param>
+	            </result>
+        </global-results>  
+        
+        
+        
+        
+        
+	</package>
+
+
+</struts>

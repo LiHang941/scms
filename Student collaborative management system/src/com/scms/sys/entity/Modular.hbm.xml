@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.sys.entity" auto-import="true">
+	<!-- 模块表    t_sys_Modular  (系统) -->
+	<class name="Modular" table="t_sys_Modular">
+	
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" type="string"></property>
+		<property name="imgUrl" type="string"></property>
+		<map name="url_method" table="url_method_map">
+			<key>
+				<column name="Modular_Name" not-null="true"></column>
+			</key>
+			<map-key type="string">
+				<column name="modular_method_name"></column>		
+			</map-key>
+			<element type="string">
+				<column name="modular_method_url"></column>
+			</element>
+		</map>
+	</class>
+</hibernate-mapping>

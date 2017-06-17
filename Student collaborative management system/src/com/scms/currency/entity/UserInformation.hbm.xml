@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.currency.entity" auto-import="true">
+	<!-- 班级名称表  t_UserInformation -->
+	<class name="UserInformation" table="t_UserInformation">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		
+		<property name="email" type="string" length="100" column="UserInformation_email"></property>
+		<property name="qq" type="string" length="100" column="UserInformation_qq"></property>
+		<property name="tel" type="string" length="100" column="UserInformation_tel"></property>
+		<property name="record" type="string" length="100" column="UserInformation_record"></property>
+		<property name="headImages" type="string"  column="UserInformation_headImages"></property>
+		<many-to-one name="user" class="com.scms.user.entity.User" lazy="false" column="UserInformation_user"></many-to-one>
+	</class>
+	
+	
+
+</hibernate-mapping>

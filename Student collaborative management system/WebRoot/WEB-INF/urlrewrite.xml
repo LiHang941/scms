@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+    
+<urlrewrite>
+    <rule>
+        <from>^/bulletin/show/([0-9]+)\.html$</from>  
+        <to type="forward">/show.do?bulletin.id=$1</to> 
+    </rule>
+    <!-- 匹配导航 entryNavigation.do?category.id = ? -->
+    <rule>
+        <from>^/entryNavigation/([0-9]+)\.html$</from>  
+        <to>/entryNavigation.do?category.id=$1</to> 
+    </rule>
+    <!-- 匹配byCategoryList.do?category.id=? -->
+    <rule>
+        <from>^/byCategoryList/([0-9]+)\.html$</from>  
+        <to>/byCategoryList.do?category.id=$1</to> 
+    </rule>
+    
+    <!-- 
+    		匹配 loginUI.do
+    		indexContent.do
+    		entryNavigation.do
+     -->
+    <rule>
+        <from>^/([a-zA-Z]+?)\.html$</from>  
+        <to>/$1.do</to> 
+    </rule>
+    
+ <!--    <rule>
+        <from>^/user/([a-z]+)/([0-9]+)$</from>
+        <to>/index.jsp?nickname=$1&amp;age=$2</to>
+　　</rule> -->
+</urlrewrite>

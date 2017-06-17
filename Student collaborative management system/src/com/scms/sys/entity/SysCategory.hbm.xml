@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.sys.entity" auto-import="true">
+	<!-- 模块表    t_sys_Category  (系统) -->
+	<class name="SysCategory" table="t_sys_Category">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>	
+		
+		<property name="State" column="SysCategory_state" type="integer"></property>
+		
+		<!-- 类别  关联-->		
+		<many-to-one name="category1" class="com.scms.bulletin.entity.Category" column="SysCategory_index_1" lazy="false"></many-to-one>
+		<many-to-one name="category2" class="com.scms.bulletin.entity.Category" column="SysCategory_index_2" lazy="false"></many-to-one>
+		<many-to-one name="category3" class="com.scms.bulletin.entity.Category" column="SysCategory_index_3" lazy="false"></many-to-one>
+		
+	
+	</class>
+</hibernate-mapping>

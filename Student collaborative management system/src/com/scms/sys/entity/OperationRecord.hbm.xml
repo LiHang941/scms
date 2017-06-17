@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.scms.sys.entity" auto-import="true">
+	<!-- 模块操作记录表    t_sys_OperationRecord  (系统) -->
+	<class name="OperationRecord" table="t_sys_OperationRecord">
+		<!-- 自增主键 -->
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="record" type="string"  column="OperationRecord_record"></property>
+		<property name="date" type="java.util.Date" column="OperationRecord_date"></property>
+		<many-to-one name="user"  class="com.scms.user.entity.User" column="OperationRecord_user" lazy="false"></many-to-one>
+	</class>
+</hibernate-mapping>
