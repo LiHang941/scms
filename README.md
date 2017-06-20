@@ -31,3 +31,5 @@
     ![主页](https://git.oschina.net/uploads/images/2017/0620/233839_6ac7e2fd_1271818.png "主页")
 
     ![公告](https://git.oschina.net/uploads/images/2017/0620/233856_04e14a71_1271818.png "公告")
+##捐赠 金额随意：
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0620/234722_a7a6e185_1271818.png "在这里输入图片标题")
