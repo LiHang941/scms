@@ -10,7 +10,7 @@
 		-  简化宿舍管理部门的工作
 		-  操作简单独立,安全高效
 -  **关键技术** ：
-   -  前端技术:jsp  layer:响应式界面  jquery + AJAX  : 提高性能 
+   -  前端技术:jsp  layer:响应式界面  jquery + AJAX 
    -  URL地址美化: urlwriter  (实现地址伪静态，美化访问地址)
    -  后端技术:Struts2 + Spring + Hibernate +   Mysql + POI Excel数据批量导入
    - 其他技术:struts 标签,JSTL标签,
